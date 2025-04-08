@@ -11,6 +11,7 @@ from scipy.stats import norm, expon, skewnorm
 
 cwd = Path(".").resolve()
 
+
 def left_skew(a, loc, size=500):
     r = skewnorm.rvs(a=a, loc=loc, size=size)
     r = r - min(r)
@@ -18,6 +19,7 @@ def left_skew(a, loc, size=500):
     r = r * loc
     r = r.astype(int)
     return random.choice(r)
+
 
 profiles = {
     "good": {
@@ -56,8 +58,10 @@ profiles = {
     },
 }
 
+
 def is_recruited(x):
     return np.random.choice([0, 1], p=[1 - x, x])
+
 
 employees = {}
 for employee_id in range(1, 26):
