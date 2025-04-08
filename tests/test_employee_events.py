@@ -17,8 +17,7 @@ project_root = Path(__file__).resolve().parent.parent
 @pytest.fixture
 def db_path():
     # The DB is located in: python-package/employee_events/employee_events.db
-    return (project_root 
-        / "python-package" / "employee_events" / "employee_events.db")
+    return project_root / "python-package" / "employee_events" / "employee_events.db"
 
 
 # 3) Define a function called `test_db_exists` that accepts `db_path`.
@@ -50,14 +49,12 @@ def table_names(db_conn):
 #    It receives the `table_names` fixture and checks that "employee"
 #    is in that list.
 def test_employee_table_exists(table_names):
-    assert ("employee" in table_names, 
-        "employee table does not exist in the database.")
+    assert "employee" in table_names, "employee table does not exist in the database."
 
 
 # 5) Define a test function `test_team_table_exists`.
 def test_team_table_exists(table_names):
-    assert ("team" in table_names, 
-        "team table does not exist in the database.")
+    assert "team" in table_names, "team table does not exist in the database."
 
 
 # 6) Define a test function `test_employee_events_table_exists`.
