@@ -16,7 +16,6 @@ class QueryMixin:
             df = pd.read_sql(sql_query_string, conn)
         return df
 
-
     # Rename 'query' to something else (e.g. 'run_query')
     def run_query(self, sql_query_string):
         """
@@ -27,7 +26,6 @@ class QueryMixin:
             cursor.execute(sql_query_string)
             data = cursor.fetchall()
         return data
-
 
     # Leave this code unchanged
     def query(func):

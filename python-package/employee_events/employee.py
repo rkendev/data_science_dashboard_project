@@ -5,7 +5,6 @@ class Employee(QueryBase):
     # Set the class attribute `name` to the string "employee"
     name = "employee"
 
-
     # Query 3: select full name & employee_id for all employees in the DB.
     def names(self):
         """
@@ -20,7 +19,6 @@ class Employee(QueryBase):
         """
         return self.run_query(query_str)
 
-
     # Define a method called `username` that receives an `id` argument
     # Query 4: select the employee's full name where employee_id = {id}.
     def username(self, id):
@@ -34,7 +32,6 @@ class Employee(QueryBase):
             WHERE employee_id = {id}
         """
         return self.run_query(query_str)
-
 
     # The method for the machine learning model data.
     def model_data(self, id):

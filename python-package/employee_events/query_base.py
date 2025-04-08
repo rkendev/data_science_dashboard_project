@@ -8,7 +8,6 @@ class QueryBase(QueryMixin):
     # set the attribute to an empty string
     name = ""
 
-
     def names(self):
         """
         Returns an empty list.
@@ -16,7 +15,6 @@ class QueryBase(QueryMixin):
         you might override or expand this logic.
         """
         return []
-
 
     def event_counts(self, id):
         """
@@ -39,7 +37,6 @@ class QueryBase(QueryMixin):
         ORDER BY event_date
         """
         return self.pandas_query(query_string)
-
 
     def notes(self, id):
         """

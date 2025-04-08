@@ -20,7 +20,6 @@ class MixinTester(QueryMixin):
     def get_tables_as_dataframe(self):
         return self.pandas_query("SELECT name FROM sqlite_master WHERE type='table'")
 
-
 # Define top-level test functions
 def test_list_of_tuples():
     tester = MixinTester()
@@ -28,7 +27,6 @@ def test_list_of_tuples():
     assert isinstance(data, list), "Expected a list"
     if data:
         assert isinstance(data[0], tuple), "Expected list of tuples"
-
 
 def test_list_of_tables_dataframe():
     tester = MixinTester()

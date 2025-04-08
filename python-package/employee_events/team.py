@@ -5,7 +5,6 @@ class Team(QueryBase):
     # Set the class attribute `name` to the string "team"
     name = "team"
 
-
     # Define a `names` method (Query 5)
     # that returns a list of tuples for all teams in the DB:
     # (team_name, team_id)
@@ -21,7 +20,6 @@ class Team(QueryBase):
         """
         return self.run_query(query_str)
 
-
     # Define a `username` method (Query 6)
     # that receives an ID argument, returning the team_name
     # for the corresponding team_id.
@@ -36,7 +34,6 @@ class Team(QueryBase):
             WHERE team_id = {id}
         """
         return self.run_query(query_str)
-
 
     # Provide a DataFrame for the machine learning model data.
     # Keep the existing query, but call self.pandas_query(query_string).
