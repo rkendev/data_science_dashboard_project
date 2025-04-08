@@ -1,31 +1,28 @@
 import pytest
+
 from pathlib import Path
 
-# Using pathlib create a project_root
-# variable set to the absolute path
-# for the root of this project
-#### YOUR CODE HERE
 
-# apply the pytest fixture decorator
-# to a `db_path` function
-#### YOUR CODE HERE
-    
-    # Using the `project_root` variable
-    # return a pathlib object for the `employee_events.db` file
-    #### YOUR CODE HERE
+# 1) Create a project_root variable set to the absolute path 
+# for the *root* of your project directory.
+# Since this file is inside "tests/", we move up one level 
+# to get the project root (which contains python-package, report, assets, etc.).
+project_root = Path(__file__).resolve().parent.parent
 
-# Define a function called
-# `test_db_exists`
-# This function should receive an argument
-# with the same name as the function
-# the creates the "fixture" for
-# the database's filepath
-#### YOUR CODE HERE
-    
-    # using the pathlib `.is_file` method
-    # assert that the sqlite database file exists
-    # at the location passed to the test_db_exists function
-    #### YOUR CODE HERE
+
+# 2) Create a pytest fixture called `db_path`.
+#    This fixture returns a Path object pointing to your employee_events.db file.
+@pytest.fixture
+def db_path():
+    # The DB is located in: python-package/employee_events/employee_events.db
+    return project_root / "python-package" / "employee_events" / "employee_events.db"
+
+
+# 3) Define a function called `test_db_exists` that accepts `db_path`.
+#    We check if the DB file physically exists.
+def test_db_exists(db_path):
+    assert db_path.is_file(), f"Database file not found at {db_path}"
+
 
 @pytest.fixture
 def db_conn(db_path):
@@ -34,36 +31,27 @@ def db_conn(db_path):
 
 @pytest.fixture
 def table_names(db_conn):
-    name_tuples = db_conn.execute("SELECT name FROM sqlite_master WHERE type='table';").fetchall()
+    """
+    Returns a list of table names in the employee_events.db database.
+    """
+    name_tuples = db_conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table';"
+    ).fetchall()
+
     return [x[0] for x in name_tuples]
 
-# Define a test function called
-# `test_employee_table_exists`
-# This function should receive the `table_names`
-# fixture as an argument
-#### YOUR CODE HERE
 
-    # Assert that the string 'employee'
-    # is in the table_names list
-    #### YOUR CODE HERE
+# 4) Define a test function `test_employee_table_exists`.
+#    It receives the `table_names` fixture and checks that "employee" is in that list.
+def test_employee_table_exists(table_names):
+    assert "employee" in table_names, "employee table does not exist in the database."
 
-# Define a test function called
-# `test_team_table_exists`
-# This function should receive the `table_names`
-# fixture as an argument
-#### YOUR CODE HERE
 
-    # Assert that the string 'team'
-    # is in the table_names list
-    #### YOUR CODE HERE
+# 5) Define a test function `test_team_table_exists`.
+def test_team_table_exists(table_names):
+    assert "team" in table_names, "team table does not exist in the database."
 
-# Define a test function called
-# `test_employee_events_table_exists`
-# This function should receive the `table_names`
-# fixture as an argument
-#### YOUR CODE HERE
 
-    # Assert that the string 'employee_events'
-    # is in the table_names list
-    #### YOUR CODE HERE
-
+# 6) Define a test function `test_employee_events_table_exists`.
+def test_employee_events_table_exists(table_names):
+    assert "employee_events" in table_names, "employee_events table does not exist in the database."

@@ -1,66 +1,56 @@
-# Import the QueryBase class
-# YOUR CODE HERE
+from .query_base import QueryBase
+from .sql_execution import QueryMixin
 
-# Import dependencies for sql execution
-#### YOUR CODE HERE
-
-# Create a subclass of QueryBase
-# called  `Team`
-#### YOUR CODE HERE
-
-    # Set the class attribute `name`
-    # to the string "team"
-    #### YOUR CODE HERE
+class Team(QueryBase):
+    # Set the class attribute `name` to the string "team"
+    name = "team"
 
 
-    # Define a `names` method
-    # that receives no arguments
-    # This method should return
-    # a list of tuples from an sql execution
-    #### YOUR CODE HERE
-        
-        # Query 5
-        # Write an SQL query that selects
-        # the team_name and team_id columns
-        # from the team table for all teams
-        # in the database
-        #### YOUR CODE HERE
-    
-
-    # Define a `username` method
-    # that receives an ID argument
-    # This method should return
-    # a list of tuples from an sql execution
-    #### YOUR CODE HERE
-
-        # Query 6
-        # Write an SQL query
-        # that selects the team_name column
-        # Use f-string formatting and a WHERE filter
-        # to only return the team name related to
-        # the ID argument
-        #### YOUR CODE HERE
+    # Define a `names` method (Query 5)
+    # that returns a list of tuples for all teams in the DB:
+    # (team_name, team_id)
+    def names(self):
+        """
+        Returns a list of tuples: (team_name, team_id)
+        for all teams in the database.
+        """
+        query_str = """
+            SELECT team_name, team_id
+            FROM team
+            ORDER BY team_id
+        """
+        return self.run_query(query_str)
 
 
-    # Below is method with an SQL query
-    # This SQL query generates the data needed for
-    # the machine learning model.
-    # Without editing the query, alter this method
-    # so when it is called, a pandas dataframe
-    # is returns containing the execution of
-    # the sql query
-    #### YOUR CODE HERE
+    # Define a `username` method (Query 6)
+    # that receives an ID argument, returning the team_name
+    # for the corresponding team_id.
+    def username(self, id):
+        """
+        Returns a list of tuples: (team_name,)
+        for the team whose team_id matches the given ID.
+        """
+        query_str = f"""
+            SELECT team_name
+            FROM team
+            WHERE team_id = {id}
+        """
+        return self.run_query(query_str)
+
+
+    # Provide a DataFrame for the machine learning model data.
+    # Keep the existing query, but call self.pandas_query(query_string).
     def model_data(self, id):
-
-        return f"""
+        query_string = f"""
             SELECT positive_events, negative_events FROM (
-                    SELECT employee_id
-                         , SUM(positive_events) positive_events
-                         , SUM(negative_events) negative_events
-                    FROM {self.name}
-                    JOIN employee_events
-                        USING({self.name}_id)
-                    WHERE {self.name}.{self.name}_id = {id}
-                    GROUP BY employee_id
-                   )
-                """
+                SELECT employee_id
+                     , SUM(positive_events) positive_events
+                     , SUM(negative_events) negative_events
+                FROM {self.name}
+                JOIN employee_events
+                    USING({self.name}_id)
+                WHERE {self.name}.{self.name}_id = {id}
+                GROUP BY employee_id
+            )
+        """
+        return self.pandas_query(query_string)
