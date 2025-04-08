@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-from employee_events.sql_execution import QueryMixin
+
 
 test_dir = Path(__file__).resolve().parent
 project_root = test_dir.parent
@@ -8,9 +8,14 @@ employee_events_dir = project_root / "python-package" / "employee_events"
 sys.path.insert(0, str(employee_events_dir.parent))
 
 
+from employee_events.sql_execution import QueryMixin
+import pandas as pd
+
+
 class MixinTester(QueryMixin):
     def get_tables_as_list_of_tuples(self):
         return self.run_query("SELECT name FROM sqlite_master WHERE type='table'")
+
 
     def get_tables_as_dataframe(self):
         return self.pandas_query("SELECT name FROM sqlite_master WHERE type='table'")

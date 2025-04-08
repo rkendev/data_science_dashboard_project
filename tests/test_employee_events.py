@@ -6,14 +6,14 @@ from pathlib import Path
 # 1) Create a project_root variable set to the absolute path
 # for the *root* of your project directory.
 # Since this file is inside "tests/", we move up one level
-# to get the project root (which contains python-package, report,
+# to get the project root (which contains python-package, report, 
 # assets, etc.).
 project_root = Path(__file__).resolve().parent.parent
 
 
 # 2) Create a pytest fixture called `db_path`.
-#    This fixture returns a Path object pointing to your
-#    employee_events.db file.
+#    This fixture returns a Path object pointing to your 
+#     employee_events.db file.
 @pytest.fixture
 def db_path():
     # The DB is located in: python-package/employee_events/employee_events.db
@@ -47,7 +47,7 @@ def table_names(db_conn):
 
 # 4) Define a test function `test_employee_table_exists`.
 #    It receives the `table_names` fixture and checks that "employee"
-#    is in that list.
+#     is in that list.
 def test_employee_table_exists(table_names):
     assert "employee" in table_names, "employee table does not exist in the database."
 
