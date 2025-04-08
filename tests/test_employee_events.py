@@ -48,21 +48,17 @@ def table_names(db_conn):
 
 # 4) Define a test function `test_employee_table_exists`.
 #    It receives the `table_names` fixture and checks that 
-#    "employee" is in
-#  that list.
+#    "employee" is in that list.
 def test_employee_table_exists(table_names):
-    assert "employee" in table_names,
-    "employee table does not exist in the database."
+    assert "employee" in table_names, "employee table does not exist in the database."
 
 
 # 5) Define a test function `test_team_table_exists`.
 def test_team_table_exists(table_names):
-    assert "team" in table_names,
-    "team table does not exist in the database."
+    assert "team" in table_names, "team table does not exist in the database."
 
 
 # 6) Define a test function `test_employee_events_table_exists`.
 def test_employee_events_table_exists(table_names):
     assert (
-        "employee_events" in table_names
-    ), "employee_events table does not exist in the database."
+        "employee_events" in table_names), "employee_events table does not exist in the database."
