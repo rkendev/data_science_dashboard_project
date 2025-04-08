@@ -1,14 +1,11 @@
 import sys
 from pathlib import Path
-
+from employee_events.sql_execution import QueryMixin
 
 test_dir = Path(__file__).resolve().parent
 project_root = test_dir.parent
 employee_events_dir = project_root / "python-package" / "employee_events"
 sys.path.insert(0, str(employee_events_dir.parent))
-
-
-from employee_events.sql_execution import QueryMixin
 
 
 class MixinTester(QueryMixin):

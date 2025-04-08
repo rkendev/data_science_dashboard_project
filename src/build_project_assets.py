@@ -135,8 +135,7 @@ for idx, e in enumerate(employee, start=1):
     for note in e["notes"]:
         _.append([idx, e["name"], note])
 
-notes = 
-    pd.DataFrame(_, columns=["employee_id", "employee_name", "note"]).assign(
+notes = pd.DataFrame(_, columns=["employee_id", "employee_name", "note"]).assign(
     event_date=np.random.choice(df.event_date, size=len(_), replace=True)
 )
 
