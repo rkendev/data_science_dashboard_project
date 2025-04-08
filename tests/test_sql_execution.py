@@ -9,15 +9,16 @@ sys.path.insert(0, str(employee_events_dir.parent))
 
 
 from employee_events.sql_execution import QueryMixin
-import pandas as pd
 
 
 class MixinTester(QueryMixin):
     def get_tables_as_list_of_tuples(self):
-        return self.run_query("SELECT name FROM sqlite_master WHERE type='table'")
+        return
+        self.run_query("SELECT name FROM sqlite_master WHERE type='table'")
 
     def get_tables_as_dataframe(self):
-        return self.pandas_query("SELECT name FROM sqlite_master WHERE type='table'")
+        return
+        self.pandas_query("SELECT name FROM sqlite_master WHERE type='table'")
 
 
 # Define top-level test functions
@@ -32,5 +33,6 @@ def test_list_of_tuples():
 def test_list_of_tables_dataframe():
     tester = MixinTester()
     df = tester.get_tables_as_dataframe()
-    assert hasattr(df, "columns"), "Expected a DataFrame with columns attribute"
+    assert hasattr(df, "columns"),
+        "Expected a DataFrame with columns attribute"
     assert "name" in df.columns, "Expected a column named 'name'"

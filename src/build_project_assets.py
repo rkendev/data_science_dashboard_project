@@ -23,7 +23,8 @@ def left_skew(a, loc, size=500):
 profiles = {
     "good": {
         "positive": lambda: norm.rvs(loc=norm.rvs(4), scale=1).astype(int),
-        "negative": lambda: expon.rvs(loc=0, scale=np.random.choice([0.5, 1])).astype(
+        "negative": lambda: expon.rvs(loc=0, 
+        scale=np.random.choice([0.5, 1])).astype(
             int
         ),
         "chance": 0.5,
@@ -134,7 +135,8 @@ for idx, e in enumerate(employee, start=1):
     for note in e["notes"]:
         _.append([idx, e["name"], note])
 
-notes = pd.DataFrame(_, columns=["employee_id", "employee_name", "note"]).assign(
+notes = 
+    pd.DataFrame(_, columns=["employee_id", "employee_name", "note"]).assign(
     event_date=np.random.choice(df.event_date, size=len(_), replace=True)
 )
 
@@ -143,7 +145,9 @@ df = df.merge(
     notes[["employee_id", "event_date", "note"]],
     on=["employee_id", "event_date"],
     how="left",
-).merge(notes[["employee_id", "employee_name"]].drop_duplicates(), on=["employee_id"])
+).merge(
+    notes[["employee_id", "employee_name"]].drop_duplicates(), 
+    on=["employee_id"])
 
 df = df.assign(shift=df.team_id.apply(lambda x: shift[x - 1]))
 
@@ -161,18 +165,22 @@ employee = df.drop_duplicates("employee_id").assign(
 )[["employee_id", "first_name", "last_name", "team_id"]]
 
 events = df[
-    ["event_date", "employee_id", "team_id", "positive_events", "negative_events"]
+    ["event_date", "employee_id", "team_id", "positive_events", 
+    "negative_events"]
 ]
 
-team = df.drop_duplicates("team_id")[["team_id", "team_name", "shift", "manager_name"]]
+team = df.drop_duplicates("team_id")[["team_id", "team_name", "shift", 
+"manager_name"]]
 
-notes = df.dropna()[["employee_id", "team_id", "note", "event_date"]].rename(
+notes = df.dropna()[["employee_id", "team_id",
+"note", "event_date"]].rename(
     columns={"event_date": "note_date"}
 )
 
 model = LogisticRegression(penalty=None)
 
-X = events.groupby("employee_id")[["positive_events", "negative_events"]].sum()
+X = events.groupby("employee_id")[["positive_events",
+"negative_events"]].sum()
 y = X.join(
     df.drop_duplicates("employee_id").set_index("employee_id")[["recruited"]]
 ).recruited
@@ -189,7 +197,8 @@ with model_path.open("wb") as file:
     pickle.dump(model, file)
 
 
-db_path = cwd.parent / "python-package" / "employee_events" / "employee_events.db"
+db_path = 
+    cwd.parent / "python-package" / "employee_events" / "employee_events.db"
 
 connection = connect(db_path)
 

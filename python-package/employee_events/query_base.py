@@ -26,7 +26,7 @@ class QueryBase(QueryMixin):
         # Summation of positive/negative events from 'employee_events'
         # grouped by event_date, filtering by the ID column
         query_string = f"""
-        SELECT 
+        SELECT
             event_date,
             SUM(positive_events) AS positive_events,
             SUM(negative_events) AS negative_events
@@ -47,8 +47,8 @@ class QueryBase(QueryMixin):
         # Retrieves note_date and note from the `notes` table,
         # filtering by the matching ID column.
         query_string = f"""
-        SELECT 
-            note_date, 
+        SELECT
+            note_date,
             note
         FROM notes
         WHERE notes.{self.name}_id = {id}

@@ -16,12 +16,14 @@ matplotlib.rcParams["savefig.format"] = "png"
 
 def matplotlib2fasthtml(func):
     """
-    Copy of https://github.com/koaning/fh-matplotlib, which is currently hardcoding the
+    Copy of https://github.com/koaning/fh-matplotlib,
+    which is currently hardcoding the
     image format as jpg. png or svg is needed here.
     """
 
     def wrapper(*args, **kwargs):
-        # Reset the figure to prevent accumulation. Maybe we need a setting for this?
+        # Reset the figure to prevent accumulation. 
+        # Maybe we need a setting for this?
         fig = plt.figure()
 
         # Run function as normal

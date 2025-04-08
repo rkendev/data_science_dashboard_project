@@ -8,7 +8,6 @@ from .base_components import Dropdown, BaseComponent, Radio, MatplotlibViz, Data
 
 
 from .combined_components import FormGroup, CombinedComponent
-from employee_events.query_base import QueryBase
 from employee_events.employee import Employee
 from employee_events.team import Team
 
@@ -21,16 +20,18 @@ class ReportDropdown(Dropdown):
         Sets self.label to model.name, then sets self.value to str(entity_id).
         """
         self.label = model.name
-        self.value = str(entity_id)  # So the dropdown "remembers" the selected item
+        # So the dropdown "remembers" the selected item
+        self.value = str(entity_id)
         return super().build_component(entity_id, model)
 
     def component_data(self, entity_id, model):
         """
-        Returns a list of (display_text, string_id) so the dropdown can match self.value.
+        Returns a list of (display_text, string_id) so the dropdown can
+        match self.value.
         """
         data = []
         for text, numeric_id in model.names():
-            data.append((text, str(numeric_id)))  # e.g. ("Alex Martinez", "1")
+            data.append((text, str(numeric_id))) 
         return data
 
 
