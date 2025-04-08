@@ -1,12 +1,8 @@
-from fasthtml.common import *
+from fasthtml.common import FastHTML, H1, Div, serve
 import matplotlib.pyplot as plt
-
-
 # import from submodules WITHIN report
 from .utils import load_model
 from .base_components import Dropdown, BaseComponent, Radio, MatplotlibViz, DataTable
-
-
 from .combined_components import FormGroup, CombinedComponent
 from employee_events.employee import Employee
 from employee_events.team import Team
