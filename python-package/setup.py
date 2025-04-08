@@ -4,8 +4,7 @@ from setuptools import setup, find_packages
 
 cwd = Path(__file__).resolve().parent
 # Read requirements from 'employee_events/requirements.txt'
-requirements = 
-    (cwd / "employee_events" / "requirements.txt").read_text().split("\n")
+requirements = (cwd / "employee_events" / "requirements.txt").read_text().split("\n")
 
 
 setup_args = dict(
