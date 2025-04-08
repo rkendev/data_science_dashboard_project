@@ -1,7 +1,6 @@
 import sys
 from pathlib import Path
 
-# Modify sys.path early (before other imports) to ensure we can import modules from employee_events.
 test_dir = Path(__file__).resolve().parent
 project_root = test_dir.parent
 employee_events_dir = project_root / "python-package" / "employee_events"
@@ -9,6 +8,7 @@ sys.path.insert(0, str(employee_events_dir.parent))  # noqa: E402
 
 from employee_events.sql_execution import QueryMixin  # noqa: E402
 import pandas as pd  # noqa: E402, F401
+
 
 class MixinTester(QueryMixin):
     def get_tables_as_list_of_tuples(self):
