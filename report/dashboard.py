@@ -31,7 +31,7 @@ class ReportDropdown(Dropdown):
         """
         data = []
         for text, numeric_id in model.names():
-            data.append((text, str(numeric_id))) 
+            data.append((text, str(numeric_id)))
         return data
 
 

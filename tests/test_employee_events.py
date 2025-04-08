@@ -3,9 +3,9 @@ import pytest
 from pathlib import Path
 
 
-# 1) Create a project_root variable set to the absolute path 
+# 1) Create a project_root variable set to the absolute path
 # for the *root* of your project directory.
-# Since this file is inside "tests/", we move up one level 
+# Since this file is inside "tests/", we move up one level
 # to get the project root (which contains python-package, report, assets, etc.).
 project_root = Path(__file__).resolve().parent.parent
 
@@ -27,7 +27,9 @@ def test_db_exists(db_path):
 @pytest.fixture
 def db_conn(db_path):
     from sqlite3 import connect
+
     return connect(db_path)
+
 
 @pytest.fixture
 def table_names(db_conn):
@@ -54,4 +56,6 @@ def test_team_table_exists(table_names):
 
 # 6) Define a test function `test_employee_events_table_exists`.
 def test_employee_events_table_exists(table_names):
-    assert "employee_events" in table_names, "employee_events table does not exist in the database."
+    assert (
+        "employee_events" in table_names
+    ), "employee_events table does not exist in the database."

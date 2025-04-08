@@ -22,7 +22,7 @@ def matplotlib2fasthtml(func):
     """
 
     def wrapper(*args, **kwargs):
-        # Reset the figure to prevent accumulation. 
+        # Reset the figure to prevent accumulation.
         # Maybe we need a setting for this?
         fig = plt.figure()
 
