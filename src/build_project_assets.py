@@ -7,7 +7,7 @@ import json
 from sqlite3 import connect
 from datetime import timedelta, date
 from sklearn.linear_model import LogisticRegression
-from scipy.stats import norm, expon, uniform, skewnorm
+#from scipy.stats import norm, expon, uniform, skewnorm
 
 
 cwd = Path(".").resolve()
@@ -147,7 +147,7 @@ df = df.merge(
     on=["employee_id", "event_date"],
     how="left",
 ).merge(
-    notes[["employee_id", "employee_name"]].drop_duplicates(), 
+    notes[["employee_id", "employee_name"]].drop_duplicates(),
     on=["employee_id"])
 
 df = df.assign(shift=df.team_id.apply(lambda x: shift[x - 1]))
@@ -166,7 +166,7 @@ employee = df.drop_duplicates("employee_id").assign(
 )[["employee_id", "first_name", "last_name", "team_id"]]
 
 events = df[
-    ["event_date", "employee_id", "team_id", "positive_events", 
+    ["event_date", "employee_id", "team_id", "positive_events",
     "negative_events"]
 ]
 
