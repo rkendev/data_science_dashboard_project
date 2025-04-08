@@ -1,6 +1,7 @@
 from .query_base import QueryBase
 from .sql_execution import QueryMixin
 
+
 class Team(QueryBase):
     # Set the class attribute `name` to the string "team"
     name = "team"

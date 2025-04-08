@@ -1,4 +1,3 @@
-import pandas as pd
 from .sql_execution import QueryMixin
 
 
@@ -18,10 +17,10 @@ class QueryBase(QueryMixin):
 
     def event_counts(self, id):
         """
-        Returns a pandas DataFrame with the sum of positive and negative events
-        grouped by event_date for the current entity (employee/team).
-        Uses f-string formatting to reference {self.name}_id in the WHERE clause,
-        and orders by event_date.
+        Returns a pandas DataFrame with the sum of positive and negative
+        events grouped by event_date for the current entity (employee/team).
+        Uses f-string formatting to reference {self.name}_id in the WHERE
+        clause, and orders by event_date.
         """
         # QUERY 1
         # Summation of positive/negative events from 'employee_events'
@@ -40,8 +39,9 @@ class QueryBase(QueryMixin):
 
     def notes(self, id):
         """
-        Returns a pandas DataFrame of notes for the current entity (employee/team).
-        Uses f-string formatting so the WHERE clause references {self.name}_id.
+        Returns a pandas DataFrame of notes for the current entity
+        (employee/team). Uses f-string formatting so the WHERE
+        clause references {self.name}_id.
         """
         # QUERY 2
         # Retrieves note_date and note from the `notes` table,
