@@ -183,7 +183,9 @@ events = df[
 ]
 
 
-team_df = df.drop_duplicates("team_id")[["team_id", "team_name", "shift", "manager_name"]]
+team_df = df.drop_duplicates("team_id")[
+    ["team_id", "team_name", "shift", "manager_name"]
+]
 
 notes_df = (
     df.dropna()[["employee_id", "team_id", "note", "event_date"]]
