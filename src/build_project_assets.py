@@ -196,8 +196,7 @@ with model_path.open("wb") as file:
     pickle.dump(model, file)
 
 
-db_path = 
-    cwd.parent / "python-package" / "employee_events" / "employee_events.db"
+db_path = cwd.parent / "python-package" / "employee_events" / "employee_events.db"
 
 connection = connect(db_path)
 
