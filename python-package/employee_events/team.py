@@ -1,4 +1,5 @@
 from .query_base import QueryBase
+from .sql_execution import QueryMixin
 
 
 class Team(QueryBase):
