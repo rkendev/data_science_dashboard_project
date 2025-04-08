@@ -1,7 +1,9 @@
 import pandas as pd
 from pathlib import Path
 import numpy as np
-import random, pickle, json
+import random
+import pickle
+import json
 from sqlite3 import connect
 from datetime import timedelta, date
 from sklearn.linear_model import LogisticRegression
@@ -172,16 +174,13 @@ team = df.drop_duplicates("team_id")[["team_id", "team_name", "shift",
 "manager_name"]]
 
 notes = df.dropna()[["employee_id", "team_id",
-"note", "event_date"]].rename(
-    columns={"event_date": "note_date"}
+"note", "event_date"]].rename(columns={"event_date": "note_date"}
 )
 
 model = LogisticRegression(penalty=None)
 
-X = events.groupby("employee_id")[["positive_events",
-"negative_events"]].sum()
-y = X.join(
-    df.drop_duplicates("employee_id").set_index("employee_id")[["recruited"]]
+X = events.groupby("employee_id")[["positive_events","negative_events"]].sum()
+y = X.join(df.drop_duplicates("employee_id").set_index("employee_id")[["recruited"]]
 ).recruited
 
 model.fit(X, y)
