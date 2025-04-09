@@ -107,6 +107,7 @@ class DashboardFilters(FormGroup):
 class Report(CombinedComponent):
     children = [Header(), DashboardFilters(), Visualizations(), NotesTable()]
 
+
 app = FastHTML(__name__)
 report_page = Report()
 
