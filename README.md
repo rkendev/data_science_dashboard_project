@@ -100,7 +100,7 @@ This project provides a dynamic dashboard application for visualizing and intera
 
     +-- test_employee_events.py
     +-- test_sql_execution.py
-
+```
 
 ## Setup & Installation
 
