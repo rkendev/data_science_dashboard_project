@@ -110,17 +110,21 @@ class Report(CombinedComponent):
 app = FastHTML(__name__)
 report_page = Report()
 
+
 @app.get("/")
 def index():
     return report_page(1, Employee())
+
 
 @app.get("/employee/{id}")
 def employee_page(id: int):
     return report_page(id, Employee())
 
+
 @app.get("/team/{id}")
 def team_page(id: int):
     return report_page(id, Team())
+
 
 @app.get("/update_dropdown{r}")
 def update_dropdown(r):
@@ -132,6 +136,7 @@ def update_dropdown(r):
         return dropdown(selected_id, Team())
     elif prof_type == "Employee":
         return dropdown(selected_id, Employee())
+
 
 @app.post("/update_data")
 async def update_data(r):
