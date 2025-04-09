@@ -7,6 +7,7 @@ from .combined_components import FormGroup, CombinedComponent
 from employee_events.employee import Employee
 from employee_events.team import Team
 
+
 # ReportDropdown
 class ReportDropdown(Dropdown):
     def build_component(self, entity_id, model):
@@ -31,9 +32,11 @@ class ReportDropdown(Dropdown):
         html += '</select>'
         return html
 
+
 class Header(BaseComponent):
     def build_component(self, entity_id, model):
         return H1(f"{model.name.capitalize()} Dashboard")
+
 
 class LineChart(MatplotlibViz):
     def visualization(self, entity_id, model):
@@ -51,6 +54,7 @@ class LineChart(MatplotlibViz):
         ax.set_ylabel("Count")
         return fig
 
+
 class BarChart(MatplotlibViz):
     predictor = load_model()
 
@@ -66,13 +70,16 @@ class BarChart(MatplotlibViz):
         self.set_axis_styling(ax, bordercolor="black", fontcolor="black")
         return fig
 
+
 class Visualizations(CombinedComponent):
     children = [LineChart(), BarChart()]
     outer_div_type = Div(cls="grid")
 
+
 class NotesTable(DataTable):
     def component_data(self, entity_id, model):
         return model.notes(entity_id)
+
 
 # Modified DashboardFilters with attributes added to the Radio element
 class DashboardFilters(FormGroup):
@@ -95,6 +102,7 @@ class DashboardFilters(FormGroup):
             "hx-trigger": "change delay:500ms",
             "hx-params": "*",
         }
+
 
 class Report(CombinedComponent):
     children = [Header(), DashboardFilters(), Visualizations(), NotesTable()]
